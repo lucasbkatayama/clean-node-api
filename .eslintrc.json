@@ -1,0 +1,6 @@
+{
+  "extends": "standart-with-typescrit",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
