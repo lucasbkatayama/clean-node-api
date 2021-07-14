@@ -1,5 +1,5 @@
 import request from 'supertest'
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper';
+import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 import app from '../config/app'
 
 describe('SignUp Routes', () => {
@@ -15,7 +15,7 @@ describe('SignUp Routes', () => {
     const accountCollection = await MongoHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
-  
+
   test('should return an account on success', async () => {
     await request(app)
       .post('/api/signup')
@@ -26,5 +26,5 @@ describe('SignUp Routes', () => {
         passwordConfirmation: '123'
       })
       .expect(200)
-  });
-});
+  })
+})

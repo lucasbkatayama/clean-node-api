@@ -1,6 +1,5 @@
-import { InvalidParamError, MissingParamError } from '../../errors';
-import { badRequest, ok, serverError, unauthorized } from '../../helper/http/http.helper';
-import { HttpRequest, HttpResponse, Controller, Authentication, Validation } from './login-protocols';
+import { badRequest, ok, serverError, unauthorized } from '../../helper/http/http.helper'
+import { HttpRequest, HttpResponse, Controller, Authentication, Validation } from './login-protocols'
 
 export class LoginController implements Controller {
   private readonly validation: Validation

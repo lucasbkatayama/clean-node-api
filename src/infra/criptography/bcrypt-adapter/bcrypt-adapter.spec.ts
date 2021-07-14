@@ -6,11 +6,11 @@ const throwError = (): never => {
 }
 
 jest.mock('bcrypt', () => ({
-  async hash (): Promise<string> {
+  async hash(): Promise<string> {
     return new Promise(resolve => resolve('hash'))
   },
 
-  async compare (): Promise<boolean> {
+  async compare(): Promise<boolean> {
     return new Promise(resolve => resolve(true))
   }
 }))
@@ -27,14 +27,14 @@ describe('Bcrypt Adapter', () => {
     await sut.hash('any_value')
 
     expect(hashSpy).toHaveBeenCalledWith('any_value', salt)
-  });
+  })
 
   test('should return a valid hash on hash success', async () => {
     const sut = makeSut()
     const hash = await sut.hash('any_value')
 
     expect(hash).toBe('hash')
-  });
+  })
 
   test('should throw if hash throws', async () => {
     const sut = makeSut()
@@ -42,7 +42,7 @@ describe('Bcrypt Adapter', () => {
     const promise = sut.hash('any_value')
 
     await expect(promise).rejects.toThrow()
-  });
+  })
 
   test('should call compare with correct values', async () => {
     const sut = makeSut()
@@ -50,22 +50,22 @@ describe('Bcrypt Adapter', () => {
     await sut.compare('any_value', 'any_hash')
 
     expect(compareSpy).toHaveBeenCalledWith('any_value', 'any_hash')
-  });
+  })
 
   test('should return true when compare success', async () => {
     const sut = makeSut()
     const isValid = await sut.compare('any_value', 'hash_value')
 
     expect(isValid).toBe(true)
-  });
+  })
 
   test('should return false when compare fail', async () => {
     const sut = makeSut()
-    jest.spyOn(bcrypt, 'compare').mockReturnValueOnce(new Promise(resolve => resolve(false)))
+    jest.spyOn(bcrypt, 'compare').mockReturnValueOnce(false)
     const isValid = await sut.compare('any_value', 'hash_value')
 
     expect(isValid).toBe(false)
-  });
+  })
 
   test('should throw if compare throws', async () => {
     const sut = makeSut()
@@ -73,5 +73,5 @@ describe('Bcrypt Adapter', () => {
     const promise = sut.compare('any_value', 'hash_value')
 
     await expect(promise).rejects.toThrow()
-  });
-});
+  })
+})

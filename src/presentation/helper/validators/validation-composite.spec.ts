@@ -1,6 +1,6 @@
-import { MissingParamError } from "../../errors";
-import { Validation } from "../../protocols/validation";
-import { ValidationComposite } from "./validation-composite";
+import { MissingParamError } from '../../errors'
+import { Validation } from '../../protocols/validation'
+import { ValidationComposite } from './validation-composite'
 
 interface SutTypes {
   sut: ValidationComposite
@@ -18,7 +18,7 @@ const makeValidation = (): Validation => {
 
 const makeSut = (): SutTypes => {
   const validationStubs = [
-    makeValidation(), 
+    makeValidation(),
     makeValidation()
   ]
   const sut = new ValidationComposite(validationStubs)
@@ -35,7 +35,7 @@ describe('Validation Composite', () => {
     jest.spyOn(validationStubs[1], 'validate').mockReturnValueOnce(new MissingParamError('field'))
     const error = sut.validate({ field: 'any_value' })
     expect(error).toEqual(new MissingParamError('field'))
-  });
+  })
 
   test('should return the first error if more then one validation fails', () => {
     const { sut, validationStubs } = makeSut()
@@ -50,4 +50,4 @@ describe('Validation Composite', () => {
     const error = sut.validate({ field: 'any_value' })
     expect(error).toBeFalsy()
   })
-});
+})

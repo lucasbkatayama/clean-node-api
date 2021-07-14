@@ -1,6 +1,6 @@
-import { Collection } from 'mongodb';
+import { Collection } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
-import { AccountMongoRepository } from './account';
+import { AccountMongoRepository } from './account-mongo-repository'
 
 let accountCollection: Collection
 
@@ -34,7 +34,7 @@ describe('Account Mongo Repository', () => {
     expect(account.name).toBe('any_name')
     expect(account.email).toBe('any_email@mail.com')
     expect(account.password).toBe('any_password')
-  });
+  })
 
   test('should return an account on loadByEmail success', async () => {
     const sut = makeSut()
@@ -49,13 +49,13 @@ describe('Account Mongo Repository', () => {
     expect(account.name).toBe('any_name')
     expect(account.email).toBe('any_email@mail.com')
     expect(account.password).toBe('any_password')
-  });
+  })
 
   test('should return null if loadByEmail fail', async () => {
     const sut = makeSut()
     const account = await sut.loadByEmail('any_email@mail.com')
     expect(account).toBeNull()
-  });
+  })
 
   test('should update account accessToken on updateAccessToken success', async () => {
     const sut = makeSut()
@@ -70,5 +70,5 @@ describe('Account Mongo Repository', () => {
     const account = await accountCollection.findOne({ _id: fakeAccount._id })
     expect(account).toBeTruthy()
     expect(account.accessToken).toBe('any_token')
-  });
-});
+  })
+})

@@ -1,6 +1,6 @@
-import { Collection } from "mongodb";
-import { MongoHelper } from "../helpers/mongo-helper";
-import { LogMongoRepository } from "./log";
+import { Collection } from 'mongodb'
+import { MongoHelper } from '../helpers/mongo-helper'
+import { LogMongoRepository } from './log'
 
 const makeSut = (): LogMongoRepository => {
   return new LogMongoRepository()
@@ -27,5 +27,5 @@ describe('Log Mongo Repository', () => {
     await sut.logError('any_error')
     const count = await errorCollection.countDocuments()
     expect(count).toBe(1)
-  });
-});
+  })
+})
